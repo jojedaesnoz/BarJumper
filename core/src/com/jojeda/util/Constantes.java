@@ -24,4 +24,5 @@ public class Constantes {
     public static final String JUMP_SOUND = "jump";
     public static final String DEATH_SOUND = "death";
     public static final String FALL_SOUND = "fall";
+    public static final String SCREAM_SOUND = "scream";
 }

@@ -54,6 +54,7 @@ public class SpriteManager {
             sounds.put(JUMP_SOUND, Gdx.audio.newSound(Gdx.files.internal("sounds" + File.separator + "jump.ogg")));
             sounds.put(DEATH_SOUND, Gdx.audio.newSound(Gdx.files.internal("sounds" + File.separator + "death.ogg")));
             sounds.put(FALL_SOUND, Gdx.audio.newSound(Gdx.files.internal("sounds" + File.separator + "fall.wav")));
+            sounds.put(SCREAM_SOUND, Gdx.audio.newSound(Gdx.files.internal("sounds" + File.separator + "scream.wav")));
         }
     }
 
@@ -88,7 +89,6 @@ public class SpriteManager {
         updatePlayer(dt);
         updateEnemies(dt);
         updateNPCS(dt);
-        updateItems(dt);
     }
 
     private void updateNPCS(float dt) {
@@ -109,9 +109,6 @@ public class SpriteManager {
         }
     }
 
-    private void updateItems(float dt) {
-
-    }
 
     private void updateEnemies(float dt) {
         Iterator<Enemy> iterEnemies = enemies.iterator();
@@ -133,8 +130,9 @@ public class SpriteManager {
                 continue;
             }
 
-            if (enemy.rect.overlaps(player.rect)) {
+            if (enemy.rect.overlaps(player.rect) && !player.isDead()) {
                 player.die();
+                sounds.get(SCREAM_SOUND).play();
             }
         }
     }
